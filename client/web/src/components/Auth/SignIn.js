@@ -11,6 +11,7 @@ import { getHostName } from '../../utils/urlUtils';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import './styles.css';
 import { isIP } from 'is-ip';
+import { Button } from '@nextui-org/button';
 
 export const sendTokenToServer = async token => {
   // Send token to server
@@ -81,9 +82,9 @@ const SignIn = ({ isLoggedIn, setToken }) => {
 
   return (
     <form onSubmit={signIn}>
-      <button type='submit' disabled={isLoading} className='auth-btn'>
+      <Button type='submit' disabled={isLoading} className='auth-btn light'>
         {isLoading ? 'Signing In...' : 'Sign in'}
-      </button>
+      </Button>
     </form>
   );
 };

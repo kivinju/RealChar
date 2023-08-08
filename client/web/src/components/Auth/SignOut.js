@@ -9,7 +9,14 @@ import React from 'react';
 import auth from '../../utils/firebase';
 import { signOut } from 'firebase/auth';
 import Avatar from '@mui/material/Avatar';
-import { Navbar, Dropdown } from '@nextui-org/react';
+import {
+  NavbarContent,
+  NavbarItem,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+} from '@nextui-org/react';
 import './styles.css';
 
 const SignOut = ({ isLoggedIn, user, handleDisconnect }) => {
@@ -38,18 +45,11 @@ const SignOut = ({ isLoggedIn, user, handleDisconnect }) => {
   };
 
   return (
-    <Navbar.Content
-      css={{
-        '@xs': {
-          w: '12%',
-          jc: 'flex-end',
-        },
-      }}
-    >
-      <Dropdown placement='bottom-right'>
-        <Navbar.Item>
+    <NavbarContent justify='end'>
+      <Dropdown placement='bottom-right' className='dropdown'>
+        <NavbarItem>
           {/* This is what triggers user info dropdown */}
-          <Dropdown.Trigger>
+          <DropdownTrigger>
             <Avatar
               className='usericon'
               color='warning'
@@ -57,36 +57,30 @@ const SignOut = ({ isLoggedIn, user, handleDisconnect }) => {
               src={user.photoURL}
               alt={user.displayName}
             />
-          </Dropdown.Trigger>
-        </Navbar.Item>
-        <Dropdown.Menu
+          </DropdownTrigger>
+        </NavbarItem>
+        <DropdownMenu
           aria-label='User menu actions'
           onAction={actionKey => handleDropdownAction(actionKey)}
+          className='dropdown-menu'
         >
           {/* This ^ is probably gonna be needed for future features,actionkey tells you what dropdown the user clicked*/}
-          <Dropdown.Item
-            className='dropdown-item'
-            key='profile'
-            css={{
-              height: '$18',
-              d: 'flex',
-            }}
-          >
+          <DropdownItem className='dropdown-item' key='profile'>
             Signed in as
             <br />
             {user.email}
-          </Dropdown.Item>
-          <Dropdown.Item
+          </DropdownItem>
+          <DropdownItem
             key='logout'
             className='dropdown-logout'
             withDivider
             color='warning'
           >
             Log Out
-          </Dropdown.Item>
-        </Dropdown.Menu>
+          </DropdownItem>
+        </DropdownMenu>
       </Dropdown>
-    </Navbar.Content>
+    </NavbarContent>
   );
 };
 

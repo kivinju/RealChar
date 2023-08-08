@@ -10,31 +10,17 @@ import logo from '../../assets/svgs/logo.svg';
 import './style.css';
 import SignIn from '../Auth/SignIn';
 import SignOut from '../Auth/SignOut';
-import { Navbar } from '@nextui-org/react';
+import { Navbar, NavbarBrand, NavbarContent } from '@nextui-org/react';
 
 const Header = ({ user, isLoggedIn, setToken, handleDisconnect }) => (
-  <Navbar id='navbar' variant='floating'>
+  <Navbar className='dark'>
     <a href='/'>
-      <Navbar.Brand
-        css={{
-          '@xs': {
-            w: '12%',
-          },
-        }}
-      >
+      <NavbarBrand id='navbar-brand'>
         <img src={logo} alt='Logo' />
-      </Navbar.Brand>
+      </NavbarBrand>
     </a>
 
-    <Navbar.Content
-      id='navbar'
-      css={{
-        '@xs': {
-          w: '19%',
-          jc: 'flex-end',
-        },
-      }}
-    >
+    <NavbarContent justify='end'>
       {user ? (
         <SignOut
           isLoggedIn={isLoggedIn}
@@ -44,7 +30,7 @@ const Header = ({ user, isLoggedIn, setToken, handleDisconnect }) => (
       ) : (
         <SignIn isLoggedIn={isLoggedIn} setToken={setToken} />
       )}
-    </Navbar.Content>
+    </NavbarContent>
   </Navbar>
 );
 
